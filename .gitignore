@@ -1,0 +1,9 @@
+__notes/
+private/
+bin/
+obj/
+.vs/
+Publish/
+Properties/
+Drawings/
+.github/instructions/
