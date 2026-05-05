@@ -1,4 +1,5 @@
 ﻿using Demo.ViewModels;
+using Demo.Services;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,7 +21,9 @@ namespace Demo
         public MainWindow()
         {
             InitializeComponent();
-            //DataContext= new PeopleViewModel();
+
+            var service = new PersonService();
+            DataContext= new PeopleViewModel(service);
         }
     }
 }

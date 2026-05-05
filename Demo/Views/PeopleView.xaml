@@ -6,16 +6,16 @@
              xmlns:viewmodels="clr-namespace:Demo.ViewModels"
              mc:Ignorable="d">
     <!--d:DesignHeight="150" d:DesignWidth="400">-->
-    <UserControl.DataContext>
+    <!--<UserControl.DataContext>
         <viewmodels:PeopleViewModel />
-    </UserControl.DataContext>
+    </UserControl.DataContext>-->
 
     <StackPanel Background="LightCoral">
-        <Label Content="{Binding Name}" />
-        <Label Content="{Binding Age}" />
+        <Label Content="{Binding CurrentPerson.Name}" />
+        <Label Content="{Binding CurrentPerson.Age}" />
+        
         <StackPanel Orientation="Horizontal">
             <Button Content="Previous" Command="{Binding Previous}" />
-            <Label />
             <Button Content="Next" Command="{Binding Next}" />
         </StackPanel>
     </StackPanel>

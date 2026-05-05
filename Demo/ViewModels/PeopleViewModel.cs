@@ -1,101 +1,62 @@
-﻿using Demo.Models;
-using System.ComponentModel;
+﻿using Demo.Infrastructure;
+using Demo.Services;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
+using System.Linq;
 
 namespace Demo.ViewModels
 {
-    public class PeopleViewModel : INotifyPropertyChanged
+    public class PeopleViewModel : ViewModelBase
     {
-        // bindable properties
+        private int _index;
 
-        private string _name;
+        public ObservableCollection<PersonViewModel> People { get; }
 
-        public string Name
+        private PersonViewModel _currentPerson;
+        public PersonViewModel CurrentPerson
         {
-            get => _name;
+            get => _currentPerson;
             private set
             {
-                _name = value;
-                NotifyPropertyChanged(nameof(Name));
+                _currentPerson = value;
+                NotifyPropertyChanged();
             }
         }
 
-        private string _age;
+        public ICommand Next { get; }
+        public ICommand Previous { get; }
 
-        public string Age
+        public PeopleViewModel(IPersonService service)
         {
-            get => _age;
-            private set
+            var models = service.GetPeople();
+
+            People = new ObservableCollection<PersonViewModel>(
+                models.Select(m => new PersonViewModel(m)));
+
+            _index = 0;
+            CurrentPerson = People[_index];
+
+            Next =     new RelayCommand(_ => MoveNext(),     _ => _index < People.Count - 1);
+            Previous = new RelayCommand(_ => MovePrevious(), _ => _index > 0);
+        }
+
+        private void MoveNext()
+        {
+            if (_index < People.Count - 1)
             {
-                _age = value;
-                NotifyPropertyChanged(nameof(Age));
+                _index++;
+                CurrentPerson = People[_index];
             }
         }
 
-        public ICommand Previous { get; init; }
-
-        public ICommand Next { get; init; }
-
-        // implementation
-
-        private PersonModel[] people = new PersonModel[]
+        private void MovePrevious()
         {
-            new PersonModel("Alice", 20),
-            new PersonModel("Bob", 25),
-            new PersonModel("Charlie", 30)
-        };
-
-        private int index = 0;
-
-        public PeopleViewModel() // this is offered as a closure
-        {
-            Name = people[index].Name;
-            Age = people[index].Age.ToString();
-
-
-            // here we are creating an expression that returns a method, e.g. an action or a function
-            Previous = new RelayCommand((someType) => // the signature of the method,
-                                              // the rest is the method itself
+            if (_index > 0)
             {
-                if (index > 0)
-                {
-                    index--;
-                    Name = people[index].Name;
-                    Age = people[index].Age.ToString();
-                }
-            });
-
-            Next = new RelayCommand(NextDelegate); // this only works if the signatures match
-
-            //Next = new RelayCommand((whateverType) =>
-            //{
-            //    if (index < people.Length - 1)
-            //    {
-            //        index++;
-            //        Name = people[index].Name;
-            //        Age = people[index].Age.ToString();
-            //    }
-            //});
-        }
-
-        public void NextDelegate(object someThing)
-        {
-            if (index < people.Length - 1)
-            {
-                index++;
-                Name = people[index].Name;
-                Age = people[index].Age.ToString();
+                _index--;
+                CurrentPerson = People[_index];
             }
         }
 
-        // boilerplate code to satisfy INotifyPropertyChanged
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        public void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged is null) return;
-            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

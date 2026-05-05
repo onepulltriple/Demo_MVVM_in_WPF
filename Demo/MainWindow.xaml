@@ -9,7 +9,6 @@
     
     <StackPanel>
         <views:PeopleView />
-        <views:PeopleView />
     </StackPanel>
     <!--<Grid Background="LightGray">
         <TextBlock Text="Hello world" />
