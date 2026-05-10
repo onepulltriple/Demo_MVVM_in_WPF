@@ -5,5 +5,8 @@
     <Compile Update="Views\PeopleView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\PersonView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

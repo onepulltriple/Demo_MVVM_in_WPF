@@ -7,10 +7,17 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Background="LightBlue">
     
-    <StackPanel>
-        <views:PeopleView />
-    </StackPanel>
     <!--<Grid Background="LightGray">
         <TextBlock Text="Hello world" />
     </Grid>-->
+    <StackPanel>
+        <views:PeopleView />
+        <views:PersonView DataContext="{Binding CurrentPerson}"/>
+        <views:PersonView DataContext="{Binding PitBoss}"/>
+    </StackPanel>
+
+    <!--<StackPanel>
+        <views:PersonView DataContext="{Binding PitBoss}"/>
+    </StackPanel>-->
+
 </Window>

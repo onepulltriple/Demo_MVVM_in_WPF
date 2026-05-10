@@ -23,6 +23,17 @@ namespace Demo.ViewModels
             }
         }
 
+        private PersonViewModel _pitBoss;
+        public PersonViewModel PitBoss
+        {
+            get => _pitBoss;
+            private set
+            {
+                _pitBoss = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public ICommand Next { get; }
         public ICommand Previous { get; }
 
@@ -38,6 +49,8 @@ namespace Demo.ViewModels
 
             Next =     new RelayCommand(_ => MoveNext(),     _ => _index < People.Count - 1);
             Previous = new RelayCommand(_ => MovePrevious(), _ => _index > 0);
+
+            PitBoss = new PersonViewModel(service.GetOnePerson());
         }
 
         private void MoveNext()

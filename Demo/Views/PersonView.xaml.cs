@@ -1,6 +1,9 @@
 ﻿using Demo.ViewModels;
-using Demo.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -11,19 +14,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Demo
+namespace Demo.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for PersonView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class PersonView : UserControl
     {
-        public MainWindow()
+        public PersonView()
         {
             InitializeComponent();
-
-            var service = new PersonService();
-            DataContext = new PeopleViewModel(service);
         }
     }
 }

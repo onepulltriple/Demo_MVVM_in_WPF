@@ -12,7 +12,7 @@
 
     <StackPanel Background="LightCoral">
         <Label Content="{Binding CurrentPerson.Name}" />
-        <Label Content="{Binding CurrentPerson.Age}" />
+        <Label Content="{Binding CurrentPerson.Age}"  />
         
         <StackPanel Orientation="Horizontal">
             <Button Content="Previous" Command="{Binding Previous}" />

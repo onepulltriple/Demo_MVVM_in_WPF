@@ -45,9 +45,9 @@ namespace Demo.ViewModels
 
         private PersonModel[] people = new PersonModel[]
         {
-            new PersonModel("Alice", 20),
-            new PersonModel("Bob", 25),
-            new PersonModel("Charlie", 30)
+            new PersonModel("Alice", 20, 70),
+            new PersonModel("Bob", 25, 80),
+            new PersonModel("Charlie", 30, 90)
         };
 
         private int index = 0;

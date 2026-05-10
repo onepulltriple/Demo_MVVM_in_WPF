@@ -9,6 +9,15 @@ namespace Demo.ViewModels
         public string Name => _model.Name;
         public string Age => _model.Age.ToString();
 
+        public string EmployeeNumber
+        {
+            get { return _model.EmployeeNumber.ToString(); }
+            set
+            {
+                _model.EmployeeNumber = Int32.Parse(value);
+            }
+        }
+
         public PersonViewModel(PersonModel model)
         {
             _model = model;
